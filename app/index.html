@@ -50,6 +50,8 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="bower_components/foundation/js/foundation.js"></script>
+    <script src="bower_components/foundation/js/foundation/foundation.equalizer.js"></script>
     <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
     <!-- endbower -->
@@ -63,6 +65,12 @@
     <!-- angular templates will be automaticaly converted in js and inserted here -->
     <!-- endinject -->
     <!-- endbuild -->
+
+    <script>
+      $(function() {
+        $(document).foundation();
+      });
+    </script>
 
   </body>
 </html>
