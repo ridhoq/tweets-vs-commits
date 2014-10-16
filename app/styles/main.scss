@@ -1,0 +1,19 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.twitter-side {
+  width: 50%;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  background-color: #55acee !important;
+}
+
+.github-side {
+  width: 50%;
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
