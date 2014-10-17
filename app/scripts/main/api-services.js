@@ -85,7 +85,7 @@ angular.module('tweetsVsCommits.services')
                 authorizationResult.get('users/' + data.login + '/events').done(function (data) {
                   console.log(data);
                   deferred.resolve(data);
-                })
+                });
               });
             //return the promise of the deferred object
             return deferred.promise;
