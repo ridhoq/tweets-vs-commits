@@ -1,0 +1,13 @@
+<div class="row" ng-controller="MainCtrl">
+  <div class="small-2 large-4 columns">
+    <button ng-click="connectTwitterButton()" ng-hide="twitterService.isReady()" id="connectTwitterButton" type="button">
+      Connect to Twitter!
+    </button>
+    <button ng-click="refreshTimeline()" ng-show="twitterService.isReady()" id="getTimeLineButton" type="button">
+      Get tweets!
+    </button>
+    <button ng-click="signOutTwitter()" ng-show="twitterService.isReady()" id="signOutTwitterButton" type="button">
+      Sign out
+    </button>
+  </div>
+</div>

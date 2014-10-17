@@ -29,7 +29,7 @@ function browserSyncInit(baseDir, files, browser) {
     startPath: '/index.html',
     server: {
       baseDir: baseDir,
-      //middleware: proxyMiddleware
+      middleware: proxyMiddleware
     },
     browser: browser
   });

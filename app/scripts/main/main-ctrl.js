@@ -1,66 +1,38 @@
 'use strict';
 
 angular.module('tweetsVsCommits')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      {
-        'key': 'angular',
-        'title': 'AngularJS',
-        'url': 'https://angularjs.org/',
-        'description': 'HTML enhanced for web apps!',
-        'logo': 'angular.png'
-      },
-      {
-        'key': 'browsersync',
-        'title': 'BrowserSync',
-        'url': 'http://browsersync.io/',
-        'description': 'Time-saving synchronised browser testing.',
-        'logo': 'browsersync.png'
-      },
-      {
-        'key': 'gulp',
-        'title': 'GulpJS',
-        'url': 'http://gulpjs.com/',
-        'description': 'The streaming build system.',
-        'logo': 'gulp.png'
-      },
-      {
-        'key': 'jasmine',
-        'title': 'Jasmine',
-        'url': 'http://jasmine.github.io/',
-        'description': 'Behavior-Driven JavaScript.',
-        'logo': 'jasmine.png'
-      },
-      {
-        'key': 'karma',
-        'title': 'Karma',
-        'url': 'http://karma-runner.github.io/',
-        'description': 'Spectacular Test Runner for JavaScript.',
-        'logo': 'karma.png'
-      },
-      {
-        'key': 'protractor',
-        'title': 'Protractor',
-        'url': 'https://github.com/angular/protractor',
-        'description': 'End to end test framework for AngularJS applications built on top of WebDriverJS.',
-        'logo': 'protractor.png'
-      },
-      {
-        'key': 'foundation',
-        'title': 'Foundation',
-        'url': 'http://foundation.zurb.com/',
-        'description': 'The most advanced responsive front-end framework in the world.',
-        'logo': 'foundation.png'
-      },
-      {
-        'key': 'ruby-sass',
-        'title': 'Sass (Ruby)',
-        'url': 'http://sass-lang.com/',
-        'description': 'Original Syntactically Awesome StyleSheets implemented in Ruby',
-        'logo': 'ruby-sass.png'
-      }
-    ];
-    angular.forEach($scope.awesomeThings, function(awesomeThing) {
-      awesomeThing.rank = Math.random();
+  .controller('MainCtrl', function ($scope, $q, twitterService) {
+
+  $scope.tweets;
+  $scope.twitterService = twitterService;
+  $scope.twitterService.initialize();
+
+  //using the OAuth authorization result get the latest 20 tweets from twitter for the user
+  $scope.refreshTimeline = function () {
+    $scope.twitterService.getLatestTweets().then(function (data) {
+      $scope.tweets = data;
+      console.log($scope.tweets);
     });
-  });
+  };
+
+  //when the user clicks the connect twitter button, the popup authorization window opens
+  $scope.connectTwitterButton = function () {
+    $scope.twitterService.connectTwitter().then(function () {
+      if ($scope.twitterService.isReady()) {
+        //if the authorization is successful, hide the connect button and display the tweets
+        $scope.refreshTimeline();
+      }
+    });
+  };
+
+  //sign out clears the OAuth cache, the user will have to reauthenticate when returning
+  $scope.signOutTwitter = function () {
+    $scope.twitterService.clearCache();
+    $scope.tweets.length = 0;
+  };
+
+  //if the user is a returning user, hide the sign in button and display the tweets
+  if ($scope.twitterService.isReady()) {
+    $scope.refreshTimeline();
+  }
+});
