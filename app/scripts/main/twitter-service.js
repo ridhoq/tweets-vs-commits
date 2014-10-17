@@ -35,7 +35,7 @@ angular.module('tweetsVsCommits.services', [])
         getLatestTweets: function () {
             //create a deferred object using Angular's $q service
             var deferred = $q.defer();
-            authorizationResult.get('/1.1/statuses/home_timeline.json').done(function (data) { //https://dev.twitter.com/docs/api/1.1/get/statuses/home_timeline
+            authorizationResult.get('/1.1/statuses/user_timeline.json').done(function (data) { //https://dev.twitter.com/docs/api/1.1/get/statuses/home_timeline
                 //when the data is retrieved resolved the deferred object
                 deferred.resolve(data);
               });

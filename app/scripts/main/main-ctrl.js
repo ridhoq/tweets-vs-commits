@@ -11,6 +11,7 @@ angular.module('tweetsVsCommits')
   $scope.refreshTimeline = function () {
     $scope.twitterService.getLatestTweets().then(function (data) {
       $scope.tweets = data;
+      console.log($scope.tweets);
     });
   };
 
